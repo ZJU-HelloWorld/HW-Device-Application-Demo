@@ -16,6 +16,7 @@
 #ifndef __CONFIG_H_
 #define __CONFIG_H_
 /* Includes ------------------------------------------------------------------*/
+#include "adc.h"
 #include "i2c.h"
 #include "tim.h"
 #include <arm_math.h>
