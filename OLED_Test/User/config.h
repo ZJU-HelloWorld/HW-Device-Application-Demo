@@ -42,35 +42,43 @@ typedef enum _device_list_e
   // DEVICE_...
   DEVICE_LIST_LEN
 } DeviceList_e;
+
 typedef enum _device_state_e
 {
   DEVICE_OK = 0U,
   DEVICE_ERROR,
 } DeviceState_e;
+
 typedef enum _data_src_e
 {
   USER_SET = 0,
   AUTO_GET
 } DataSrc_e;
 /* Exported macro ------------------------------------------------------------*/
+#define IS_STEERABLE_STANDARD 0
+
 /* Ctrl Define ------------------------------- */
-#define CTRL_FREQ                  1000.0f
-#define HALF_CTRL_FREQ             (CTRL_FREQ / 2)
-#define OLED_CMD_FREQ              5.0f
+#define CTRL_FREQ             1000.0f
+#define HALF_CTRL_FREQ        (CTRL_FREQ / 2)
+#define OLED_CMD_FREQ         5.0f
 /* Devices ------------------------------------*/
-#define HTIM_CONTROL               htim6
-#define HI2C_OLED                  hi2c2
-#define VOTAGE_DROP                0.0f
-#define HADC_INT                   hadc1
-#define HADC_EXT                   hadc3
+#define HTIM_CONTROL          htim6
+#define HI2C_OLED             hi2c2
+#define VOTAGE_DROP           0.0f
+#define HADC_INT              hadc1
+#define HADC_EXT              hadc3
+
+#if IS_STEERABLE_STANDARD
 #define SUPERCAP_FULL_VOTAGE       24.8f
 #define SUPERCAP_MIN_USABLE_VOTAGE 16.0f
+#endif
+
 /* Conditional Compiling ----------------------*/
 /* Module Used Define */
-#define USE_OLED                   1
+#define USE_OLED  1
 /* Debug Settings -----------------------------*/
-#define DEBUG_ON                   0
-#define DEBUG_OFF                  (!DEBUG_ON)
+#define DEBUG_ON  0
+#define DEBUG_OFF (!DEBUG_ON)
 /* Exported constants --------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/

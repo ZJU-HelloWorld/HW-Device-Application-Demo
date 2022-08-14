@@ -17,9 +17,11 @@
 #include "api_notification.h"
 /* Private types -------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
-#define USER_STRING1 "Aim R"
-#define USER_STRING2 "Aim B"
-#define USER_STRING3 "UNSET"
+#if IS_STEERABLE_STANDARD
+#define AIM_RED_STRING  "Aim R"
+#define AIM_BLUE_STRING "Aim B"
+#define UNSET_STRING    "UNSET"
+#endif
 /* Private constants ---------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* External variables --------------------------------------------------------*/
@@ -40,10 +42,12 @@ void API_Note_Oled_Init(const unsigned char (*string_list)[DEVICE_NAME_STRING_LE
   if (NULL == info)
     return;
 
-  info->pwr_data.battery_perc            = 0;
-  info->pwr_data.supercap_perc           = 0;
+  info->pwr_data.battery_perc = 0;
+#if IS_STEERABLE_STANDARD
+  info->supercap_perc = 0;
+  info->enemy_color   = UNSET;
+#endif
   info->pwr_data.volt_vrefint_proportion = FML_Pwrsrc_GetVrefintProportion();
-  info->enemy_color                      = UNSET;
 
   if (NULL != string_list)
   {
@@ -118,6 +122,7 @@ void API_Note_Oled_SetBatteryPerc(const DataSrc_e src, const float votage,
   last_volt = volt;
 }
 
+#if IS_STEERABLE_STANDARD
 /**
  *******************************************************************************
  * @brief     Set supercap percentage in power data struct
@@ -146,8 +151,8 @@ void API_Note_Oled_SetSupercapPerc(const DataSrc_e src, const float votage,
   float cap_min_2 = SUPERCAP_MIN_USABLE_VOTAGE * SUPERCAP_MIN_USABLE_VOTAGE;
 
   float perc;
-  perc                         = (volt_2 - cap_min_2) / (cap_max_2 - cap_min_2);
-  info->pwr_data.supercap_perc = (uint16_t)(perc * 100);
+  perc                = (volt_2 - cap_min_2) / (cap_max_2 - cap_min_2);
+  info->supercap_perc = (uint16_t)(perc * 100);
 
   last_volt = volt;
 }
@@ -168,6 +173,7 @@ void API_Note_Oled_SetEnemyColor(const EnemyColor_e color, OledNoteInfo_t* info)
 
   info->enemy_color = color;
 }
+#endif
 
 /**
  *******************************************************************************
@@ -222,29 +228,37 @@ void API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,
   }
   FML_Pwrsrc_Init(); /* Reinit Battery Votage ADC Transmit */
 
+#if IS_STEERABLE_STANDARD
   /* Display Dynamic Icon */
-  uint8_t kIconBeginPixelCol = BATTERY_BOX_MAX_PIXEL_A_ROW + 5;
-  FML_Oled_DisplayIcon(kIconBeginPixelCol, 1, dynamic_box, &info->gram);
+  if (NULL != dynamic_box)
+  {
+    uint8_t kIconBeginPixelCol = BATTERY_BOX_MAX_PIXEL_A_ROW + 5;
+    FML_Oled_DisplayIcon(kIconBeginPixelCol, 1, dynamic_box, &info->gram);
+  }
 
   /* Display Enemy Color */
   uint8_t kTxtBeginPixelCol = BATTERY_BOX_MAX_PIXEL_A_ROW + 5 + dynamic_box->length + 5;
   FML_Oled_Printf(kTxtBeginPixelCol, 1 + 1,
                   &info->gram,
-                  RED == info->enemy_color    ? USER_STRING1
-                  : BLUE == info->enemy_color ? USER_STRING2
-                                              : USER_STRING3);
+                  RED == info->enemy_color    ? AIM_RED_STRING
+                  : BLUE == info->enemy_color ? AIM_BLUE_STRING
+                                              : UNSET_STRING);
+#endif
 
   /* Display Device Info */
-  uint8_t show_col, show_row;
-  for (uint8_t i = 0; i < device_len; i++)
+  if (NULL != error_list)
   {
-    /* 3 devices a row */
-    show_col = i % 3 * (MAX_COLUMN / 3);
-    show_row = BATTERY_BOX_MAX_PIXEL_A_COL + 1 + i / 3 * CHAR_HEIGHT;
-    FML_Oled_DisplayIcon(show_col, show_row,
-                         &check_box[error_list[i]], &info->gram);
-    FML_Oled_DisplayString(show_col + CHECK_BOX_MAX_PIXEL_A_ROW + 1, show_row,
-                           info->device_string_list[i], &info->gram);
+    uint8_t show_col, show_row;
+    for (uint8_t i = 0; i < device_len; i++)
+    {
+      /* 3 devices a row */
+      show_col = i % 3 * (MAX_COLUMN / 3);
+      show_row = BATTERY_BOX_MAX_PIXEL_A_COL + 1 + i / 3 * CHAR_HEIGHT;
+      FML_Oled_DisplayIcon(show_col, show_row,
+                           &check_box[error_list[i]], &info->gram);
+      FML_Oled_DisplayString(show_col + CHECK_BOX_MAX_PIXEL_A_ROW + 1, show_row,
+                             info->device_string_list[i], &info->gram);
+    }
   }
 
   FML_Oled_RefreshGram(&info->gram);

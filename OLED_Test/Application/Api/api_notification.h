@@ -37,8 +37,13 @@
 /* Exported types ------------------------------------------------------------*/
 typedef struct _oled_note_info_t
 {
-  PwrsrcData_t  pwr_data;
-  EnemyColor_e  enemy_color;
+  PwrsrcData_t pwr_data;
+
+#if IS_STEERABLE_STANDARD
+  uint16_t     supercap_perc;
+  EnemyColor_e enemy_color;
+#endif
+
   unsigned char device_string_list[DEVICE_LIST_LEN][DEVICE_NAME_STRING_LEN];
 
   OledGram_t gram;
@@ -55,9 +60,13 @@ void API_Note_Oled_ModifyIconBox(const uint8_t col, const uint8_t row,
                                  uint8_t*      box);
 void API_Note_Oled_SetBatteryPerc(const DataSrc_e src, const float votage,
                                   OledNoteInfo_t* info);
+
+#if IS_STEERABLE_STANDARD
 void API_Note_Oled_SetSupercapPerc(const DataSrc_e src, const float votage,
                                    OledNoteInfo_t* info);
 void API_Note_Oled_SetEnemyColor(const EnemyColor_e color, OledNoteInfo_t* info);
+#endif
+
 void API_Note_Oled_SetDeviceState(const DeviceList_e index, const DeviceState_e state,
                                   DeviceState_e* list);
 void API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,

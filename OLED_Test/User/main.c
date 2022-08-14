@@ -106,10 +106,12 @@ int main(void)
     /* USER CODE BEGIN 3 */
     NoteInfo_t* info = (NoteInfo_t*)TLL_Get_NoteInfoPtr();
 
+#if IS_STEERABLE_STANDARD
     float i = SUPERCAP_MIN_USABLE_VOTAGE +
               HAL_GetTick() % 5000 / 5000.0f * (SUPERCAP_FULL_VOTAGE - SUPERCAP_MIN_USABLE_VOTAGE);
     API_Note_Oled_SetSupercapPerc(USER_SET, i, &info->oled);
     API_Note_Oled_SetEnemyColor(RED, &info->oled);
+#endif
 
     API_Note_Oled_SetDeviceState(DEVICE_RC, DEVICE_OK, info->error_list);
     API_Note_Oled_SetDeviceState(DEVICE_BOARD_COMM, DEVICE_OK, info->error_list);

@@ -28,7 +28,6 @@ typedef struct _pwrsrc_data_t
 {
   float    volt_vrefint_proportion;
   uint16_t battery_perc;
-  uint16_t supercap_perc;
 } PwrsrcData_t;
 /* Exported macro ------------------------------------------------------------*/
 #ifndef VOTAGE_DROP

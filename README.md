@@ -1,4 +1,4 @@
-**HWModuleTestProjects**
+**HWModuleTestDemo**
 
 # Hello World 电控模块测试例程
 
@@ -52,9 +52,10 @@ TODO
 TODO
 
 ### OLED OLED显示
-* 请使用8pin牛角接插件将OLED连接至C板上SPI接口.
-* 在`./User/main.c` `main`函数主循环中简单手动设置要在OLED上展示的设备在线情况和其他显示内容.
-* 可于`./Application/Tasks/tll_hmi.c` 中设置自定义显示内容. 若不按照现有格式显示，可能需要修改 `API` 层函数.
+* 请使用8pin牛角接插件将OLED连接至C板上I2C接口.
+* 在`./User/main.c` `main`函数主循环中简单手动设置要在OLED上展示的设备在线情况等.
+* 在`./User/config.h` 中修改 `IS_STEERABLE_STANDARD` 编译开关来选择是否显示以舵轮步兵为例的额外动态图标和文字.
+* 用户可于`./Application/Tasks/tll_hmi.c` 中设置自定义显示内容. 若不按照现有格式显示，可能需要修改 `API` 层函数.
 
 ### Referee 裁判系统串口通信
 TODO
@@ -98,7 +99,7 @@ TODO
     ├───main.c
     └───system.c/h
 ```
-* 完整工程结构
+* 完整例程结构
 ```
 Xx_Test
   ├───Drivers/Startup

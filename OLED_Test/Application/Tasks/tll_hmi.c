@@ -16,11 +16,13 @@
 #include "tll_hmi.h"
 /* Private types -------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+#if IS_STEERABLE_STANDARD
 #define SUPERCAP_BOX_ARRAY_MAX_A_ROW 48 /* max colomn number, or max pixels each row */
 #define SUPERCAP_BOX_ARRAY_MAX_A_COL 2  /* 14 pixels need 2 Bytes */
 
 #define SUPERCAP_BOX_MAX_PIXEL_A_ROW 48 /* in pixel */
 #define SUPERCAP_BOX_MAX_PIXEL_A_COL 14
+#endif
 /* Private constants ---------------------------------------------------------*/
 const static unsigned char device_name_string[DEVICE_LIST_LEN][DEVICE_NAME_STRING_LEN] = {
     "RC  \0", "Comm\0", "Refr\0",
@@ -30,8 +32,10 @@ const static unsigned char device_name_string[DEVICE_LIST_LEN][DEVICE_NAME_STRIN
 };
 /* Private variables ---------------------------------------------------------*/
 volatile NoteInfo_t note_info;
-static OledIcon_t   dymanic_box;
-static uint8_t      supercap_box_data[SUPERCAP_BOX_ARRAY_MAX_A_ROW * SUPERCAP_BOX_ARRAY_MAX_A_COL] = {
+
+#if IS_STEERABLE_STANDARD
+static OledIcon_t dymanic_box;
+static uint8_t    supercap_box_data[SUPERCAP_BOX_ARRAY_MAX_A_ROW * SUPERCAP_BOX_ARRAY_MAX_A_COL] = {
     0xFF, 0xFC, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04,
     0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04,
     0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04,
@@ -44,6 +48,7 @@ static uint8_t      supercap_box_data[SUPERCAP_BOX_ARRAY_MAX_A_ROW * SUPERCAP_BO
 static OledIcon_t supercap_box = {.length = SUPERCAP_BOX_MAX_PIXEL_A_ROW,
                                   .width  = SUPERCAP_BOX_MAX_PIXEL_A_COL,
                                   .data   = (uint8_t*)supercap_box_data};
+#endif
 /* External variables --------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick);
@@ -104,10 +109,11 @@ static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick)
 {
   if (IS_TO_CMD_OLED(system_tick))
   {
+#if IS_STEERABLE_STANDARD
     /* Generate dynamic supercap icon box */
     for (uint8_t i = 1; i < SUPERCAP_BOX_MAX_PIXEL_A_ROW - 2; i++)
     {
-      if (i <= info->oled.pwr_data.supercap_perc * (SUPERCAP_BOX_MAX_PIXEL_A_ROW - 3) / 100)
+      if (i <= info->oled.supercap_perc * (SUPERCAP_BOX_MAX_PIXEL_A_ROW - 3) / 100)
       {
         /* fill one column */
         API_Note_Oled_ModifyIconBox(i, 0,
@@ -128,8 +134,10 @@ static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick)
       }
     }
     dymanic_box = supercap_box;
-
     /* acion */
     API_Note_Oled_Refresh(&dymanic_box, info->error_list, DEVICE_LIST_LEN, &info->oled);
+#else
+    API_Note_Oled_Refresh(NULL, info->error_list, DEVICE_LIST_LEN, &info->oled);
+#endif
   }
 }
