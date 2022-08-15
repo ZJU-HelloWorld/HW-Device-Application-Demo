@@ -120,6 +120,8 @@ void API_Note_Oled_SetBatteryPerc(const DataSrc_e src, const float votage,
   info->pwr_data.battery_perc = (uint16_t)(perc * 100);
 
   last_volt = volt;
+  
+  FML_Pwrsrc_Init(); /* Reinit Battery Votage ADC Transmit */
 }
 
 #if IS_STEERABLE_STANDARD
@@ -226,7 +228,6 @@ void API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,
                     1 + 1,
                     &info->gram, "%d", info->pwr_data.battery_perc);
   }
-  FML_Pwrsrc_Init(); /* Reinit Battery Votage ADC Transmit */
 
 #if IS_STEERABLE_STANDARD
   /* Display Dynamic Icon */

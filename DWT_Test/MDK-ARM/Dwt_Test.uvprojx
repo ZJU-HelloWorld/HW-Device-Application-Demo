@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Bsp\Inc;..\User</IncludePath>
+              <IncludePath>../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Bsp\Core\Inc;..\User</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -476,32 +476,32 @@
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Bsp\Src\system_stm32f4xx.c</FilePath>
+              <FilePath>..\BSP\Core\Src\system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
-          <GroupName>Bsp/Core</GroupName>
+          <GroupName>BSP/Core</GroupName>
           <Files>
             <File>
               <FileName>gpio.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Bsp\Src\gpio.c</FilePath>
+              <FilePath>..\BSP\Core\Src\gpio.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_msp.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Bsp\Src\stm32f4xx_hal_msp.c</FilePath>
+              <FilePath>..\BSP\Core\Src\stm32f4xx_hal_msp.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Bsp\Src\stm32f4xx_it.c</FilePath>
+              <FilePath>..\BSP\Core\Src\stm32f4xx_it.c</FilePath>
             </File>
             <File>
               <FileName>tim.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Bsp\Src\tim.c</FilePath>
+              <FilePath>..\BSP\Core\Src\tim.c</FilePath>
             </File>
           </Files>
         </Group>

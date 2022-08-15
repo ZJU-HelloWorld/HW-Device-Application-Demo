@@ -20,8 +20,6 @@
 /* Private types -------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 #define IS_HTIM_CONTROL(htim) ((htim) == &HTIM_CONTROL)
-#define IS_HADC_INT(hadc)     ((hadc) == &HADC_INT)
-#define IS_HADC_EXT(hadc)     ((hadc) == &HADC_EXT)
 /* Private constants ---------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static uint32_t system_tick;
@@ -91,23 +89,5 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
   if (IS_HTIM_CONTROL(htim))
   {
     Sys_Task_Manager();
-  }
-}
-
-/**
- *******************************************************************************
- * @brief     ADC conversion complete callbacks in non blocking modes user realization
- * @param     ADC_HandleTypeDef* hadc
- * @arg       hadc3 - external adc sample
- * @retval    None
- * @note      None
- *******************************************************************************
- */
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
-{
-  if (IS_HADC_EXT(hadc))
-  {
-    NoteInfo_t* tmp_info = (NoteInfo_t*)TLL_Get_NoteInfoPtr();
-    API_Note_Oled_SetBatteryPerc(AUTO_GET, NULL, &tmp_info->oled);
   }
 }

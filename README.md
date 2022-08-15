@@ -83,12 +83,11 @@ TODO
 │   ├───Api
 │   └───Tasks
 ├───Bsp
-│   ├───Inc
-│   └───Src
+│   ├───Core
+│		└───Middlewares
 ├───Components
 │   ├───Algorithms
 │   ├───Devices
-│   ├───Middlewares
 │   └───USB_DEVICE
 ├───Docs
 ├───Drivers
@@ -107,11 +106,11 @@ Xx_Test
   ├───Drivers/CMSIS
   ├───Drivers/USB_Device_Library
   ├───BSP/Core
+  ├───BSP/Middleware
   ├───Components/Algorithm
-  ├───Components/Device
-  ├───Components/Middleware
+	├───Components/Device
   ├───Components/USB_DEVICE
-  ├───Application/Interface
+	├───Application/Interface
   ├───Application/Task
   └───Application/User
 ```

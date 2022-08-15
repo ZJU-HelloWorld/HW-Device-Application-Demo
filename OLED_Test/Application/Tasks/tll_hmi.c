@@ -109,6 +109,7 @@ static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick)
 {
   if (IS_TO_CMD_OLED(system_tick))
   {
+    API_Note_Oled_SetBatteryPerc(AUTO_GET, NULL, &info->oled);
 #if IS_STEERABLE_STANDARD
     /* Generate dynamic supercap icon box */
     for (uint8_t i = 1; i < SUPERCAP_BOX_MAX_PIXEL_A_ROW - 2; i++)

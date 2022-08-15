@@ -55,7 +55,7 @@ typedef enum _data_src_e
   AUTO_GET
 } DataSrc_e;
 /* Exported macro ------------------------------------------------------------*/
-#define IS_STEERABLE_STANDARD 0
+#define IS_STEERABLE_STANDARD 1
 
 /* Ctrl Define ------------------------------- */
 #define CTRL_FREQ             1000.0f
