@@ -1,7 +1,7 @@
 /**
  *******************************************************************************
  * @file      : system.c/h
- * @brief     : task manager & user callback serving funtions realization
+ * @brief     : task manager & user callback serving functions realization
  * @history   :
  *  Version     Date            Author          Note
  *  V1.0        2019-02-17      wwy             1. Done
@@ -39,13 +39,11 @@ static void _Sys_Task_Manager(void);
 void Sys_Init(void)
 {
   /* ----------------------BSP Init ------------------ */
+  /* ------------------- Device Init ----------------- */
 #if USE_BUZZER
   FML_Buzzer_Init();
 #endif
-  /* ------------------- Device Init ----------------- */
-
   /* ------ Communication Init & Algorithms Init ----- */
-
   /* -------------------- Task Init ------------------ */
   TLL_Hmi_Init();
 

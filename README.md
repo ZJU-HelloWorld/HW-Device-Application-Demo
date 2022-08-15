@@ -84,7 +84,7 @@ TODO
 │   └───Tasks
 ├───Bsp
 │   ├───Core
-│		└───Middlewares
+│   └───Middlewares
 ├───Components
 │   ├───Algorithms
 │   ├───Devices
@@ -104,13 +104,12 @@ Xx_Test
   ├───Drivers/Startup
   ├───Drivers/STM32F4XX_HAL_Driver
   ├───Drivers/CMSIS
-  ├───Drivers/USB_Device_Library
   ├───BSP/Core
   ├───BSP/Middleware
   ├───Components/Algorithm
-	├───Components/Device
+  ├───Components/Device
   ├───Components/USB_DEVICE
-	├───Application/Interface
+  ├───Application/Interface
   ├───Application/Task
   └───Application/User
 ```

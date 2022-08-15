@@ -1,7 +1,7 @@
 /**
  *******************************************************************************
  * @file      : system.c/h
- * @brief     : task manager & user callback serving funtions realization
+ * @brief     : task manager & user callback serving functions realization
  * @history   :
  *  Version     Date            Author          Note
  *  V1.0        2019-02-17      wwy             1. Done
