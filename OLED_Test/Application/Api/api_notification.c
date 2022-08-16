@@ -120,7 +120,7 @@ void API_Note_Oled_SetBatteryPerc(const DataSrc_e src, const float votage,
   info->pwr_data.battery_perc = (uint16_t)(perc * 100);
 
   last_volt = volt;
-  
+
   FML_Pwrsrc_Init(); /* Reinit Battery Votage ADC Transmit */
 }
 
@@ -204,17 +204,19 @@ void API_Note_Oled_SetDeviceState(const DeviceList_e index, const DeviceState_e 
  * @arg       1 - Error, 0 - OK
  * @param     const uint8_t device_len: device list length
  * @param     OledNoteInfo_t* info: oled notificating info struct
+ * @retval    Api_StatusTypeDef: status
  * @retval    OledNoteInfo_t* info: modified within the function
  * @note      `Standard` specific
  *******************************************************************************
  */
-void API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,
-                           const DeviceState_e* error_list, const uint8_t device_len,
-                           OledNoteInfo_t* info)
+Api_StatusTypeDef API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,
+                                        const DeviceState_e* error_list, const uint8_t device_len,
+                                        OledNoteInfo_t* info)
 {
   if (NULL == info)
-    return;
+    return API_DATA_ERROR;
 
+  Api_StatusTypeDef status = API_OK;
   FML_Oled_OperateGram(PEN_CLEAR, &info->gram);
   FML_Oled_DisplayIcon(1, 1,
                        &battery_box, &info->gram);
@@ -262,5 +264,10 @@ void API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,
     }
   }
 
-  FML_Oled_RefreshGram(&info->gram);
+  if (DVC_OK != FML_Oled_RefreshGram(&info->gram))
+  {
+    status = API_DATA_ERROR;
+  }
+
+  return status;
 }

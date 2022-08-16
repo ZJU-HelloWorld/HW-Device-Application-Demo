@@ -23,6 +23,22 @@
 #include <math.h>
 /* Exported types ------------------------------------------------------------*/
 typedef uint8_t bool_t;
+
+typedef enum _dvc_status_type_def
+{
+  DVC_OK = 0U,
+  DVC_RX_ERROR,
+  DVC_TX_ERROR,
+  DVC_DATA_ERROR
+} Dvc_StatusTypeDef;
+
+typedef enum _api_status_type_def
+{
+  API_OK = 0U,
+  API_CONNECT_ERROR,
+  API_DATA_ERROR
+} Api_StatusTypeDef;
+
 typedef enum _device_list_e
 {
   DEVICE_RC = 0,

@@ -184,22 +184,22 @@ static const OledIcon_t battery_box = {.length = BATTERY_BOX_MAX_PIXEL_A_ROW,
                                        .data   = (uint8_t*)battery_box_data};
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
-void FML_Oled_Init(void);
-void FML_Oled_DisplayOn(void);
-void FML_Oled_DisplayOff(void);
-void FML_Oled_OperateGram(const OledPen_e pen, OledGram_t* gram);
-void FML_Oled_RefreshGram(OledGram_t* gram);
-void FML_Oled_DisplayLine(const uint8_t x1, const uint8_t y1,
-                          const uint8_t x2, const uint8_t y2,
-                          const OledPen_e pen,
-                          OledGram_t*     gram);
-void FML_Oled_DisplayChar(const uint8_t col, const uint8_t row, const uint8_t ch,
-                          OledGram_t* gram);
-void FML_Oled_DisplayString(const uint8_t col, const uint8_t row, const uint8_t* ch,
-                            OledGram_t* gram);
-void FML_Oled_Printf(const uint8_t col, const uint8_t row, OledGram_t* gram,
-                     const char* fmt, ...);
-void FML_Oled_DisplayIcon(const uint8_t x, const uint8_t y, const OledIcon_t* icon,
-                          OledGram_t* gram);
+void              FML_Oled_Init(void);
+void              FML_Oled_DisplayOn(void);
+void              FML_Oled_DisplayOff(void);
+void              FML_Oled_OperateGram(const OledPen_e pen, OledGram_t* gram);
+Dvc_StatusTypeDef FML_Oled_RefreshGram(OledGram_t* gram);
+void              FML_Oled_DisplayLine(const uint8_t x1, const uint8_t y1,
+                                       const uint8_t x2, const uint8_t y2,
+                                       const OledPen_e pen,
+                                       OledGram_t*     gram);
+void              FML_Oled_DisplayChar(const uint8_t col, const uint8_t row, const uint8_t ch,
+                                       OledGram_t* gram);
+void              FML_Oled_DisplayString(const uint8_t col, const uint8_t row, const uint8_t* ch,
+                                         OledGram_t* gram);
+void              FML_Oled_Printf(const uint8_t col, const uint8_t row, OledGram_t* gram,
+                                  const char* fmt, ...);
+void              FML_Oled_DisplayIcon(const uint8_t x, const uint8_t y, const OledIcon_t* icon,
+                                       OledGram_t* gram);
 
 #endif /* __FML_OLED_H_ */

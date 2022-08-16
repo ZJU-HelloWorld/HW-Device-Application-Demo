@@ -69,8 +69,9 @@ void API_Note_Oled_SetEnemyColor(const EnemyColor_e color, OledNoteInfo_t* info)
 
 void API_Note_Oled_SetDeviceState(const DeviceList_e index, const DeviceState_e state,
                                   DeviceState_e* list);
-void API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,
-                           const DeviceState_e* error_list, const uint8_t device_len,
-                           OledNoteInfo_t* info);
+
+Api_StatusTypeDef API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,
+                                        const DeviceState_e* error_list, const uint8_t device_len,
+                                        OledNoteInfo_t* info);
 
 #endif /* __API_NOTIFICATION_H_ */

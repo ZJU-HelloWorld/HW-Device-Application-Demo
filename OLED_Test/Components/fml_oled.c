@@ -140,18 +140,25 @@ void FML_Oled_OperateGram(const OledPen_e pen, OledGram_t* gram)
  *******************************************************************************
  * @brief     send the data of gram to oled sreen
  * @param     OledGram_t* gram: graphic ram to operate
+ * @retval    Dvc_StatusTypeDef: status
  * @retval    OledGram_t* gram
  * @note      None
  *******************************************************************************
  */
-void FML_Oled_RefreshGram(OledGram_t* gram)
+Dvc_StatusTypeDef FML_Oled_RefreshGram(OledGram_t* gram)
 {
   if (NULL == gram)
-    return;
+    return DVC_DATA_ERROR;
 
+  Dvc_StatusTypeDef status = DVC_OK;
   _FML_Oled_SetPoint(0, 0);
   gram->cmd = 0x40;
-  HAL_I2C_Master_Transmit_DMA(&HI2C_OLED, OLED_I2C_ADDRESS, (uint8_t*)gram, 1025);
+  if (HAL_OK != HAL_I2C_Master_Transmit_DMA(&HI2C_OLED, OLED_I2C_ADDRESS, (uint8_t*)gram, 1025))
+  {
+    status = DVC_TX_ERROR;
+  }
+
+  return status;
 }
 
 /**
@@ -355,13 +362,10 @@ void FML_Oled_DisplayIcon(const uint8_t x, const uint8_t y, const OledIcon_t* ic
       for (uint8_t j = 0; j < 8; j++)
       {
         if (temp_char & 0x80)
-        {
           _FML_Oled_DisplayPoint(x + col, y + row, PEN_WRITE, gram);
-        }
         else
-        {
           _FML_Oled_DisplayPoint(x + col, y + row, PEN_CLEAR, gram);
-        }
+
         temp_char <<= 1;
         row++;
         if (row == icon->width)
@@ -422,7 +426,6 @@ static void _FML_Oled_SetPoint(uint8_t x, uint8_t y)
  * @arg       PEN_INVERSION: (x,y) value inversion
  * @param     OledGram_t* gram: graphic ram to operate
  * @retval    OledGram_t* gram
- * @retval    None
  * @note      None
  *******************************************************************************
  */

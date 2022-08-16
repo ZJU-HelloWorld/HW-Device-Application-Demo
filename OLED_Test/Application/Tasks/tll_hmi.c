@@ -136,9 +136,9 @@ static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick)
     }
     dymanic_box = supercap_box;
     /* acion */
-    API_Note_Oled_Refresh(&dymanic_box, info->error_list, DEVICE_LIST_LEN, &info->oled);
+    (void)API_Note_Oled_Refresh(&dymanic_box, info->error_list, DEVICE_LIST_LEN, &info->oled);
 #else
-    API_Note_Oled_Refresh(NULL, info->error_list, DEVICE_LIST_LEN, &info->oled);
+    (void)API_Note_Oled_Refresh(NULL, info->error_list, DEVICE_LIST_LEN, &info->oled);
 #endif
   }
 }
