@@ -21,8 +21,8 @@
 /* Private constants ---------------------------------------------------------*/
 static const float kVRefInternal = 1.2f;
 /* Private variables ---------------------------------------------------------*/
-static uint16_t int_data_buf;
-static uint16_t ext_data_buf[2];
+volatile static uint16_t int_data_buf;
+volatile static uint16_t ext_data_buf[2];
 /* External variables --------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 

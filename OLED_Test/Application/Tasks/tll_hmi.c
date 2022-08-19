@@ -34,7 +34,7 @@ const static unsigned char device_name_string[DEVICE_LIST_LEN][DEVICE_NAME_STRIN
 volatile NoteInfo_t note_info;
 
 #if IS_STEERABLE_STANDARD
-static OledIcon_t dymanic_box;
+static OledIcon_t dynamic_box;
 static uint8_t    supercap_box_data[SUPERCAP_BOX_ARRAY_MAX_A_ROW * SUPERCAP_BOX_ARRAY_MAX_A_COL] = {
     0xFF, 0xFC, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04,
     0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04, 0x80, 0x04,
@@ -134,11 +134,15 @@ static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick)
                                     0x04, supercap_box_data);
       }
     }
-    dymanic_box = supercap_box;
+    dynamic_box = supercap_box;
     /* acion */
-    (void)API_Note_Oled_Refresh(&dymanic_box, info->error_list, DEVICE_LIST_LEN, &info->oled);
+    if (API_OK != API_Note_Oled_Refresh(&dynamic_box, info->error_list, DEVICE_LIST_LEN, &info->oled))
+    {
+    }
 #else
-    (void)API_Note_Oled_Refresh(NULL, info->error_list, DEVICE_LIST_LEN, &info->oled);
+    if (API_OK != API_Note_Oled_Refresh(NULL, info->error_list, DEVICE_LIST_LEN, &info->oled))
+    {
+    }
 #endif
   }
 }

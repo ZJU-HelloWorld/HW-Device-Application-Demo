@@ -33,44 +33,66 @@ All Rights Reserved.
 * 在 `./User/main.c` `main`函数主循环中设置设备错误状态以实现告警.
 * 可于 `./Application/Tasks/tll_hmi.c` 中修改播放开机音乐的长度和内容.
 * 只有当无设备错误时，开机音乐能正常完整播放.
+---------------
 
 ### DWT(datawatchpoint and trace) DWT计时器
 * 在 `system.c` 中的 `Sys_Task_Manager` 函数测量程序运行用时.
 * 使用DWT计时器可以获得us级别的系统时钟数据.
+---------------
 
 ### IMU 惯性测量单元
 TODO
+---------------
 
 ### Laser 红点激光器
 * 请将红点激光器连接至C板上'5V'接口.
 * 在`./User/main.c` `main`函数主循环中调节亮度.
+---------------
 
 ### STM32-MiniPC Communication 上下位机通信测试
-TODO
+* 可使用USB-MicroUSB连接STM32和上位机，或使用CH340模块连接C型开发板4-pin UART2和上位机.
+* 在`./User/config.h` 中修改编译开关来选择通信方式：
+    * `USE_MINIPC_USB`: USB通信，波特率不限；
+    * `USE_MINIPC_UART`: 串口通信，波特率默认为1.5MHz (1,500,000)；
+        * `USE_MINIPC_UART_*X_DMA`: R或T，STM32接收或发送数据使用DMA；
+        * `USE_MINIPC_UART_*X_IT`: R或T，STM32接收或发送数据使用中断.
+* 在`./User/config.h` 中修改 `MINIPC_SEND_FREQ` 编译开关来设置STM32发送频率：
+* 在`./User/main.c` `main`函数主循环中设置STM32向上位机发送的数据.
+* 请Debug或使用J-Scope等软件浏览接收到的数据.
+* 在`./User/config.h` 中修改 `IS_STEERABLE_STANDARD` 编译开关来选择是否使用以舵轮步兵为例的格式解析通信数据.
+> 若关闭`IS_STEERABLE_STANDARD` 编译开关，则`main`函数中发送数据接口失效，除校验帧头外，默认发送全0数据帧.
+* 对于USB传输，采用了接收原始数据后开启5KHz定时器TIM3中断，在中断回调函数中处理数据后关闭定时器的形式，来模拟实现USB接收回调函数，并将标志位置位以通知主程序.
+---------------
 
 ### Motor 电机
 TODO
+---------------
 
 ### OLED OLED显示
 * 请使用8pin牛角接插件将OLED连接至C板上I2C接口.
 * 在`./User/main.c` `main`函数主循环中简单手动设置要在OLED上展示的设备在线情况等.
 * 在`./User/config.h` 中修改 `IS_STEERABLE_STANDARD` 编译开关来选择是否显示以舵轮步兵为例的额外动态图标和文字.
 * 用户可于`./Application/Tasks/tll_hmi.c` 中设置自定义显示内容. 若不按照现有格式显示，可能需要修改 `API` 层函数.
+---------------
 
 ### Referee 裁判系统串口通信
 TODO
+---------------
 
 ### Remote Control 遥控系统
 * 请将DR16接收机连接至C板上DBUS接口，并与DT7遥控器正确对频.
-* 没有设置用户接口，请Debug或使用J-Scope等软件浏览数据.
+* 没有设置用户接口，请Debug或使用J-Scope等软件浏览接收到的数据.
+---------------
 
 ### Servo 舵机
 * 请将舵机连接至C板上PWM接口.
 * 在`./User/main.c` `main`函数中初始化使用的输出通道.
 * 在`./User/main.c` `main`函数主循环中设置舵机角度. 若要精确设置角度，请同时输入舵机的转动范围，如180°舵机对应180.
+---------------
 
 ### Snail Snail电机
 TODO
+---------------
 
 ### SuperCap Control Communication 超级电容主控通信测试
 TODO

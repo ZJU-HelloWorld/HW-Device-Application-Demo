@@ -114,12 +114,12 @@ int main(void)
 #endif
 
     API_Note_Oled_SetDeviceState(DEVICE_RC, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_BOARD_COMM, DEVICE_OK, info->error_list);
+    API_Note_Oled_SetDeviceState(DEVICE_BOARD_COMM, DEVICE_ERROR, info->error_list); // DEVICE_ERROR
     API_Note_Oled_SetDeviceState(DEVICE_REFEREE, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_MINIPC, DEVICE_OK, info->error_list);
+    API_Note_Oled_SetDeviceState(DEVICE_MINIPC, DEVICE_ERROR, info->error_list); // DEVICE_ERROR
     API_Note_Oled_SetDeviceState(DEVICE_FRIC_MOTOR, DEVICE_OK, info->error_list);
     API_Note_Oled_SetDeviceState(DEVICE_FEED_MOTOR, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_GIMBAL_YAW_MOTOR, DEVICE_OK, info->error_list);
+    API_Note_Oled_SetDeviceState(DEVICE_GIMBAL_YAW_MOTOR, DEVICE_ERROR, info->error_list); //DEVICE_ERROR
     API_Note_Oled_SetDeviceState(DEVICE_GIMBAL_PITCH_MOTOR, DEVICE_OK, info->error_list);
     API_Note_Oled_SetDeviceState(DEVICE_WHEEL_MOTOR_F, DEVICE_OK, info->error_list);
     API_Note_Oled_SetDeviceState(DEVICE_WHEEL_MOTOR_B, DEVICE_OK, info->error_list);

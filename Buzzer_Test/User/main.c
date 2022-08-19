@@ -103,8 +103,8 @@ int main(void)
     /* if error type set, will warn rather than play music */
 //    API_Note_Buzzer_SetErrorType(IS_GIMBAL_BOOSTER_ERROR, &info->buzzer); // B
 //    API_Note_Buzzer_SetErrorType(IS_CHASSIS_ERROR, &info->buzzer);        // BB
-//    API_Note_Buzzer_SetErrorType(IS_REFEREE_ERROR, &info->buzzer);        // BBB   
-    API_Note_Buzzer_SetErrorType(IS_MINIPC_ERROR, &info->buzzer);         // BBBB
+    API_Note_Buzzer_SetErrorType(IS_REFEREE_ERROR, &info->buzzer);        // BBB   
+//    API_Note_Buzzer_SetErrorType(IS_MINIPC_ERROR, &info->buzzer);         // BBBB
   }
   /* USER CODE END 3 */
 }

@@ -222,14 +222,11 @@ Api_StatusTypeDef API_Note_Oled_Refresh(const OledIcon_t*    dynamic_box,
                        &battery_box, &info->gram);
 
   /* Display battery percentage */
-  if (info->pwr_data.battery_perc < 10)
-  {
-    FML_Oled_Printf(info->pwr_data.battery_perc < 10    ? 1 + CHAR_WIDTH * 1.5
-                    : info->pwr_data.battery_perc < 100 ? 1 + CHAR_WIDTH * 1.0
-                                                        : 1 + CHAR_WIDTH * 0.5,
-                    1 + 1,
-                    &info->gram, "%d", info->pwr_data.battery_perc);
-  }
+  FML_Oled_Printf(info->pwr_data.battery_perc < 10    ? 1 + CHAR_WIDTH * 1.5
+                  : info->pwr_data.battery_perc < 100 ? 1 + CHAR_WIDTH * 1.0
+                                                      : 1 + CHAR_WIDTH * 0.5,
+                  1 + 1,
+                  &info->gram, "%d", info->pwr_data.battery_perc);
 
 #if IS_STEERABLE_STANDARD
   /* Display Dynamic Icon */
