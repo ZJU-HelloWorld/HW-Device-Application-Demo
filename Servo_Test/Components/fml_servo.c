@@ -26,32 +26,6 @@ static const float   kServoMaxPulse = 2500.0f;
 
 /**
  *******************************************************************************
- * @brief     Initialize all 7 pwm channels (DJI Board Type C)
- * @param     None
- * @retval    None
- * @note      None
- *******************************************************************************
- */
-#ifndef _CODE_INIT_ALL_PWM_CH
-#define _CODE_INIT_ALL_PWM_CH
-void FML_Pwm_InitAllCh(void)
-{
-  HAL_TIM_Base_Start_IT(&HTIM_PWM1);
-  HAL_TIM_Base_Start_IT(&HTIM_PWM2);
-
-  HAL_TIM_PWM_Start(&HTIM_PWM1, HTIM_PWM_CH1);
-  HAL_TIM_PWM_Start(&HTIM_PWM1, HTIM_PWM_CH2);
-  HAL_TIM_PWM_Start(&HTIM_PWM1, HTIM_PWM_CH3);
-  HAL_TIM_PWM_Start(&HTIM_PWM1, HTIM_PWM_CH4);
-
-  HAL_TIM_PWM_Start(&HTIM_PWM2, HTIM_PWM_CH1);
-  HAL_TIM_PWM_Start(&HTIM_PWM2, HTIM_PWM_CH2);
-  HAL_TIM_PWM_Start(&HTIM_PWM2, HTIM_PWM_CH3);
-}
-#endif
-
-/**
- *******************************************************************************
  * @brief     Initialize one pwm channels
  * @param     None
  * @retval    None

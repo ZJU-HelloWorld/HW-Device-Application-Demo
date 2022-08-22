@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../BSP/Core/Inc;../User;../Components</IncludePath>
+              <IncludePath>../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../BSP/Core/Inc;../User;../Components;../BSP/Middlewares</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -675,6 +675,16 @@
               <FileName>tim.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\BSP\Core\Src\tim.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP/Middleware</GroupName>
+          <Files>
+            <File>
+              <FileName>bsp_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\BSP\Middlewares\bsp_pwm.c</FilePath>
             </File>
           </Files>
         </Group>

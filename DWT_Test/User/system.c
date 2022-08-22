@@ -37,11 +37,6 @@ static void Sys_Task_Manager(void);
  */
 void Sys_Init(void)
 {
-  /* ----------------------BSP Init ------------------ */
-  /* ------------------- Device Init ----------------- */
-  /* ------ Communication Init & Algorithms Init ----- */
-  /* -------------------- Task Init ------------------ */
-
 #if DEBUG_ON
   Debug_Dwt_Init();
 #endif

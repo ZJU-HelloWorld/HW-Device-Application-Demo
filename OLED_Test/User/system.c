@@ -37,13 +37,11 @@ static void Sys_Task_Manager(void);
  */
 void Sys_Init(void)
 {
-  /* ----------------------BSP Init ------------------ */
   /* ------------------- Device Init ----------------- */
 #if USE_OLED
   FML_Oled_Init();
   FML_Pwrsrc_Init();
 #endif
-  /* ------ Communication Init & Algorithms Init ----- */
   /* -------------------- Task Init ------------------ */
   TLL_Hmi_Init();
 

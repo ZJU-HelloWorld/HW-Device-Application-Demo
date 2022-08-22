@@ -40,21 +40,16 @@ static void Sys_Task_Manager(void);
  */
 void Sys_Init(void)
 {
-  /* ----------------------BSP Init ------------------ */
   /* ------------------- Device Init ----------------- */
 #if USE_MINIPC_UART
   FML_Minipc_Init();
 #endif
-  /* ------ Communication Init & Algorithms Init ----- */
   /* -------------------- Task Init ------------------ */
   TLL_Perception_Init();
   TLL_Action_Init();
 
   /* Main IT init to start managing tasks */
   HAL_TIM_Base_Start_IT(&HTIM_CONTROL);
-#if USE_MINIPC_USB
-  HAL_TIM_Base_Start_IT(&HTIM_USB_RX_IT);
-#endif
 }
 
 /**
@@ -62,7 +57,7 @@ void Sys_Init(void)
  * @brief     task manager
  * @param     None
  * @retval    None
- * @note      Called by TIM6 interrupt，1KHz run tasks by order
+ * @note      Called by TIM6 interrupt
  *******************************************************************************
  */
 static void Sys_Task_Manager(void)

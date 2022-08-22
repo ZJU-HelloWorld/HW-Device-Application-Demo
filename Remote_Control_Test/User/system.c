@@ -39,12 +39,10 @@ static void Sys_Task_Manager(void);
  */
 void Sys_Init(void)
 {
-  /* ----------------------BSP Init ------------------ */
   /* ------------------- Device Init ----------------- */
 #if USE_RC
   FML_Rc_Init();
 #endif
-  /* ------ Communication Init & Algorithms Init ----- */
   /* -------------------- Task Init ------------------ */
   TLL_Hmi_Init();
 

@@ -38,12 +38,10 @@ static void _Sys_Task_Manager(void);
  */
 void Sys_Init(void)
 {
-  /* ----------------------BSP Init ------------------ */
   /* ------------------- Device Init ----------------- */
 #if USE_BUZZER
   FML_Buzzer_Init();
 #endif
-  /* ------ Communication Init & Algorithms Init ----- */
   /* -------------------- Task Init ------------------ */
   TLL_Hmi_Init();
 

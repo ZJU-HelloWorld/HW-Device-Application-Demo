@@ -90,8 +90,8 @@ int main(void)
   MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
 #if USE_SERVO
+  BSP_Pwm_InitAllCh();
 //  FML_Servo_InitSingleCh(1U);
-  FML_Pwm_InitAllCh();
 #endif
   /* USER CODE END 2 */
 
