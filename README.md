@@ -103,9 +103,9 @@ TODO
 ```
 .\
 ├───Application
-│   ├───Api
+│   ├───API
 │   └───Tasks
-├───Bsp
+├───BSP
 │   ├───Core
 │   └───Middlewares
 ├───Components
