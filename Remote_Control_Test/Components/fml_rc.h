@@ -167,7 +167,7 @@ MouseKbEvent_t;
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
 void              FML_Rc_Init(void);
-void              FML_Rc_DbusReset(void);
+void              FML_Rc_Reset(void);
 Dvc_StatusTypeDef FML_Rc_RxDataHandler(RcData_t* rc_data);
 void              FML_Rc_GetMouseKbEvent(const RcData_t* last_rc_data, const RcData_t* rc_data,
                                          MouseKbEvent_t* event);

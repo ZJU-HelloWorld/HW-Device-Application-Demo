@@ -97,7 +97,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
   if (IS_HTIM_USB_RX_IT(htim))
   {
     CommInfo_t* tmp_info = (CommInfo_t*)TLL_Get_CommInfoPtr();
-    if (DVC_DATA_ERROR == FML_Minipc_RxDataHandler(&tmp_info->minipc_data))
+    if (DVC_OK != FML_Minipc_RxDataHandler(&tmp_info->minipc_data))
     {
     }
 

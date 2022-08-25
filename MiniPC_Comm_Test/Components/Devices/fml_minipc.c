@@ -107,7 +107,7 @@ Dvc_StatusTypeDef FML_Minipc_RxDataHandler(MinipcData_t* data)
   }
   else
   {
-    status = DVC_DATA_ERROR;
+    status = DVC_RX_ERROR;
   }
 #elif USE_MINIPC_UART_RX_IT
   uint8_t minipc_rcv_data = uart_rx_buf;
@@ -144,7 +144,7 @@ Dvc_StatusTypeDef FML_Minipc_RxDataHandler(MinipcData_t* data)
       else
       {
         RESET_RX_IT_FSM(data->rx_fsm);
-        status = DVC_DATA_ERROR;
+        status = DVC_RX_ERROR;
       }
       break;
     }
@@ -179,7 +179,7 @@ Dvc_StatusTypeDef FML_Minipc_RxDataHandler(MinipcData_t* data)
       else
       {
         RESET_RX_IT_FSM(data->rx_fsm);
-        status = DVC_DATA_ERROR;
+        status = DVC_RX_ERROR;
       }
       break;
     }
@@ -206,7 +206,7 @@ Dvc_StatusTypeDef FML_Minipc_RxDataHandler(MinipcData_t* data)
   }
   else
   {
-    status = DVC_DATA_ERROR;
+    status = DVC_RX_ERROR;
   }
 #endif
   return status;

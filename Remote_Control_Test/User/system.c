@@ -105,7 +105,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
     CtrlInfo_t* tmp_info = (CtrlInfo_t*)TLL_Get_CtrlInfoPtr();
     if (DVC_OK != FML_Rc_RxDataHandler(&tmp_info->data))
     {
-      FML_Rc_DbusReset();
+      /* hardware reset */
+      FML_Rc_Reset();
+      /* data reset */
+      API_Ctrl_Init(&tmp_info->data);
     }
   }
 }

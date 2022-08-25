@@ -54,7 +54,7 @@ void FML_Rc_Init(void)
  * @note      None
  *******************************************************************************
  */
-void FML_Rc_DbusReset(void)
+void FML_Rc_Reset(void)
 {
   HAL_UART_Abort(&HUART_DBUS_RC);
   memset((uint8_t*)dbus_rx_buf, 0, DBUS_RX_BUF_LEN);
@@ -80,40 +80,37 @@ Dvc_StatusTypeDef FML_Rc_RxDataHandler(RcData_t* rc_data)
   uint8_t local_dbus_buf[DBUS_RX_BUF_LEN] = {0};
   memcpy(local_dbus_buf, (uint8_t*)dbus_rx_buf, sizeof(dbus_rx_buf));
 
-  rc_data->ch1 = (local_dbus_buf[0] | local_dbus_buf[1] << 8) & 0x07FF;
-  rc_data->ch1 -= RC_CH_OFFSET;
-  rc_data->ch2 = (local_dbus_buf[1] >> 3 | local_dbus_buf[2] << 5) & 0x07FF;
-  rc_data->ch2 -= RC_CH_OFFSET;
-  rc_data->ch3 = (local_dbus_buf[2] >> 6 | local_dbus_buf[3] << 2 | local_dbus_buf[4] << 10) & 0x07FF;
-  rc_data->ch3 -= RC_CH_OFFSET;
-  rc_data->ch4 = (local_dbus_buf[4] >> 1 | local_dbus_buf[5] << 7) & 0x07FF;
-  rc_data->ch4 -= RC_CH_OFFSET;
-
-  rc_data->sw1 = ((local_dbus_buf[5] >> 4) & 0x000C) >> 2;
-  rc_data->sw2 = (local_dbus_buf[5] >> 4) & 0x0003;
-
-  rc_data->mouse.x = local_dbus_buf[6] | (local_dbus_buf[7] << 8);
-  rc_data->mouse.y = local_dbus_buf[8] | (local_dbus_buf[9] << 8);
-  rc_data->mouse.z = local_dbus_buf[10] | (local_dbus_buf[11] << 8);
-
-  rc_data->mouse.l = local_dbus_buf[12];
-  rc_data->mouse.r = local_dbus_buf[13];
-
+  rc_data->ch1         = (local_dbus_buf[0] | local_dbus_buf[1] << 8) & 0x07FF;
+  rc_data->ch2         = (local_dbus_buf[1] >> 3 | local_dbus_buf[2] << 5) & 0x07FF;
+  rc_data->ch3         = (local_dbus_buf[2] >> 6 | local_dbus_buf[3] << 2 | local_dbus_buf[4] << 10) & 0x07FF;
+  rc_data->ch4         = (local_dbus_buf[4] >> 1 | local_dbus_buf[5] << 7) & 0x07FF;
+  rc_data->sw1         = ((local_dbus_buf[5] >> 4) & 0x000C) >> 2;
+  rc_data->sw2         = (local_dbus_buf[5] >> 4) & 0x0003;
+  rc_data->mouse.x     = local_dbus_buf[6] | (local_dbus_buf[7] << 8);
+  rc_data->mouse.y     = local_dbus_buf[8] | (local_dbus_buf[9] << 8);
+  rc_data->mouse.z     = local_dbus_buf[10] | (local_dbus_buf[11] << 8);
+  rc_data->mouse.l     = local_dbus_buf[12];
+  rc_data->mouse.r     = local_dbus_buf[13];
   rc_data->kb.key_code = local_dbus_buf[14] | local_dbus_buf[15] << 8;
+  rc_data->ch5         = local_dbus_buf[16] | local_dbus_buf[17] << 8;
 
+  rc_data->ch1 -= RC_CH_OFFSET;
+  rc_data->ch2 -= RC_CH_OFFSET;
+  rc_data->ch3 -= RC_CH_OFFSET;
+  rc_data->ch4 -= RC_CH_OFFSET;
   /* Wheel at the top left of DT7 */
-  rc_data->ch5 = local_dbus_buf[16] | local_dbus_buf[17] << 8;
   rc_data->ch5 -= RC_CH_OFFSET;
 
+  /* error detect */
   if (abs(rc_data->ch1) > RC_CH_RANGE ||
       abs(rc_data->ch2) > RC_CH_RANGE ||
       abs(rc_data->ch3) > RC_CH_RANGE ||
       abs(rc_data->ch4) > RC_CH_RANGE ||
+      abs(rc_data->ch5) > RC_CH_RANGE ||
       rc_data->sw1 == 0 ||
-      rc_data->sw2 == 0 ||
-      abs(rc_data->ch5) > RC_CH_RANGE)
+      rc_data->sw2 == 0)
   {
-    status = DVC_DATA_ERROR;
+    status = DVC_RX_ERROR;
   }
   else
   {
