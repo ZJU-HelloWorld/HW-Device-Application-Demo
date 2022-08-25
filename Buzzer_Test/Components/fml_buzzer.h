@@ -5,7 +5,7 @@
  * @history   :
  *  Version     Date            Author          Note
  *  V1.0        Null            Senior          1. Firstly Done
- *  V2.0        2022-03-16      xdl             1. Refactored
+ *  V2.0        2022-03-16      Xue Donglai     1. Refactored
  *******************************************************************************
  * @attention :
  *******************************************************************************

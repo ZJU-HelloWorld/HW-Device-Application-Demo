@@ -4,7 +4,7 @@
  * @brief     : Battery remaning power & supercap remaining power detect
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-07-19      xdl             1. Done
+ *  V1.0        2022-07-19      Xue Donglai     1. Done
  *******************************************************************************
  * @attention : Using DMA, please realize `HAL_ADC_ConvCpltCallback` in system.c
  *              to call data processing functions after conversion finish

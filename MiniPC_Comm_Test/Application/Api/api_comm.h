@@ -4,7 +4,7 @@
  * @brief     : Communicate with MiniPC, Super Cap Ctrl, et al.
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-08-17      xdl             1. Done
+ *  V1.0        2022-08-17      Xue Donglai     1. Done
  *******************************************************************************
  * @attention :
  *******************************************************************************

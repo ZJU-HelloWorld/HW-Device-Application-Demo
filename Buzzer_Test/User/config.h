@@ -4,7 +4,7 @@
  * @brief     : Board related config for devices & conditional compiling settings
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-07-16      xdl             1. Done
+ *  V1.0        2022-07-16      Xue Donglai     1. Done
  *******************************************************************************
  * @attention :
  *******************************************************************************

@@ -6,7 +6,7 @@
  * @history   :
  *  Version     Date            Author          Note
  *  V1.0        2018-12-26      RM              1. Done
- *  V2.0        2022-07-18      xdl             1. Modified
+ *  V2.0        2022-07-18      Xue Donglai     1. Modified
  *******************************************************************************
  * @attention : Modified from oled.c/h, oledfont.h, bsp_i2c.c/h
  *              (C) COPYRIGHT 2019 DJI

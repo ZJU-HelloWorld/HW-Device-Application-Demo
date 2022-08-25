@@ -4,8 +4,8 @@
  * @brief     : Message notificating interface
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-03-04      xdl             1. Done
- *  V1.1        2022-07-17      xdl             1. Refactored
+ *  V1.0        2022-03-04      Xue Donglai     1. Done
+ *  V1.1        2022-07-17      Xue Donglai     1. Refactored
  *******************************************************************************
  * @attention :
  *******************************************************************************

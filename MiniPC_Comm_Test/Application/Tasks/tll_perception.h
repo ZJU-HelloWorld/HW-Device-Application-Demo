@@ -5,7 +5,7 @@
  *              minipc and supercap control board data et al.
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-08-15      xdl             1. Done
+ *  V1.0        2022-08-15      Xue Donglai     1. Done
  *******************************************************************************
  * @attention :
  *******************************************************************************

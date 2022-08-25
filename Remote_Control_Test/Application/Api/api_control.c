@@ -6,8 +6,8 @@
  *  Version     Date            Author          Note
  *  V1.0        2019-04-17      wwy             1. Done
  *  V1.1        Null            Senior          1. Revised
- *  V2.0        2022-03-11      xdl             1. Refactored
- *  V2.1        2022-08-01      xdl             1. Revised
+ *  V2.0        2022-03-11      Xue Donglai     1. Refactored
+ *  V2.1        2022-08-01      Xue Donglai     1. Revised
  *******************************************************************************
  * @attention : api_control.c/h are not general application interfaces, but
  *              can be specially modified by users for various services and arms.

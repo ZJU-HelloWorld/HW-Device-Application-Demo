@@ -5,8 +5,8 @@
                 UI drawing, music playing and notification et al.
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-03-17      xdl             1. Done
- *  V1.1        2022-07-23      xdl             1. Revised
+ *  V1.0        2022-03-17      Xue Donglai     1. Done
+ *  V1.1        2022-07-23      Xue Donglai     1. Revised
  *******************************************************************************
  * @attention :
  *******************************************************************************

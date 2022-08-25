@@ -4,7 +4,7 @@
  * @brief     : Board related config for devices & conditional compiling settings
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-07-16      xdl             1. Done
+ *  V1.0        2022-07-16      Xue Donglai     1. Done
  *******************************************************************************
  * @attention :
  *******************************************************************************
@@ -57,7 +57,7 @@ typedef enum _dvc_status_type_def
  * @brief     :
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-02-dd      xdl             1.
+ *  V1.0        2022-02-dd      Xue Donglai     1.
  *******************************************************************************
  * @attention :
  *******************************************************************************
@@ -81,7 +81,7 @@ typedef enum _dvc_status_type_def
  * @brief     :
  * @history   :
  *  Version     Date            Author          Note
- *  V1.0        2022-02-dd      xdl             1.
+ *  V1.0        2022-02-dd      Xue Donglai     1.
  *******************************************************************************
  * @attention :
  *******************************************************************************

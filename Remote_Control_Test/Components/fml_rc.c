@@ -5,9 +5,9 @@
  * @history   :
  *  Version     Date            Author          Note
  *  V1.0        2019-01-29      not wwy         1. DMA rcv
- *  V2.0        2022-02-11      xdl             1. Refactored
+ *  V2.0        2022-02-11      Xue Donglai     1. Refactored
  *                                              2. Using HAL
- *  V2.1        2022-08-02      xdl             1. Revised
+ *  V2.1        2022-08-02      Xue Donglai     1. Revised
  *******************************************************************************
  * @attention : if we have a pointer MouseKbEvent_t* ptr,
  *  use `ptr->duration_u.duration_single.A` to get pressed duration of key `A`;
