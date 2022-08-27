@@ -25,32 +25,33 @@ static void _TLL_Action_SendMinipcData(CommInfo_t* info);
 
 /**
  *******************************************************************************
- * @brief     Action task init
- * @param     None
- * @retval    None
- * @note      called by `Sys_Init`
+ * @brief       Action task init
+ * @param       AppInfoMsg_t* msg:
+ * @retval      None
+ * @note        called by `Sys_Init`
  *******************************************************************************
  */
-void TLL_Action_Init(void)
+void TLL_Action_Init(AppInfoMsg_t* msg)
 {
+  UNUSED(msg);
 }
 
 /**
  *******************************************************************************
- * @brief     Acion task, including transmitting data to referee and other
-              tx tasks, cmd acting components et al.
- * @param     uint32_t system_tick
- * @param     CommInfo_t* info
- * @retval    None
- * @note      None
+ * @brief       Acion task, including transmitting data to referee and other
+                tx tasks, cmd acting components et al.
+ * @param       uint32_t system_tick:
+ * @param       AppInfoMsg_t* msg:
+ * @arg         None
+ * @retval      None
  *******************************************************************************
  */
-void TLL_Action_Task(uint32_t system_tick, CommInfo_t* comm_info)
+void TLL_Action_Task(uint32_t system_tick, AppInfoMsg_t* msg)
 {
   /* minipc send tx data */
   if (IS_TO_SEND_MINIPC(system_tick))
   {
-    _TLL_Action_SendMinipcData(comm_info);
+    _TLL_Action_SendMinipcData((CommInfo_t*)msg->app_info[COMM_INFO]);
   }
 }
 

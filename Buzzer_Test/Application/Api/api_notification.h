@@ -28,6 +28,7 @@ typedef enum _error_to_note_e
   IS_REFEREE_ERROR,
   IS_MINIPC_ERROR,
 } ErrorToNote_e;
+
 typedef struct _buzzer_note_info_t
 {
   bool_t        is_playing_startup_music;
@@ -36,6 +37,11 @@ typedef struct _buzzer_note_info_t
   uint32_t music_cnt;         /* num of tones played */
   uint32_t error_warning_cnt; /* cnt for error duration */
 } BuzzerNoteInfo_t;
+
+typedef struct _note_info_t
+{
+  BuzzerNoteInfo_t buzzer;
+} NoteInfo_t;
 /* Exported macro ------------------------------------------------------------*/
 #ifndef CTRL_FREQ
 #define CTRL_FREQ 1000.0f

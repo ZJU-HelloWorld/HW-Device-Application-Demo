@@ -19,11 +19,6 @@
 #include "api_notification.h"
 #include "config.h"
 /* Exported types ------------------------------------------------------------*/
-typedef struct _note_info_t
-{
-  OledNoteInfo_t oled;
-  DeviceState_e  error_list[DEVICE_LIST_LEN];
-} NoteInfo_t;
 /* Exported macro ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/

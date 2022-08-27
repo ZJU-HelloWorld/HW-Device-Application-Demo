@@ -105,6 +105,7 @@ int main(void)
 #if IS_STEERABLE_STANDARD
     CommInfo_t* info                 = (CommInfo_t*)TLL_Get_CommInfoPtr();
     info->minipc_vars.tx.enemy_color = BLUE;
+    // info->minipc_vars.tx.enemy_color = info->minipc_vars.rx.enemy_color; // for loop test
     info->minipc_vars.tx.aim_mode    = ANTI_TWIST;
     info->minipc_vars.tx.bullet_spd  = 28.0f;
     info->minipc_vars.tx.minipc_mode = MINIPC_ON;

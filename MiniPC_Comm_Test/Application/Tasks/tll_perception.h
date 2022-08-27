@@ -23,8 +23,8 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
-void                 TLL_Perception_Init(void);
-void                 TLL_Perception_Task(uint32_t system_tick);
+void                 TLL_Perception_Init(AppInfoMsg_t* msg);
+void                 TLL_Perception_Task(uint32_t system_tick, AppInfoMsg_t* msg);
 volatile CommInfo_t* TLL_Get_CommInfoPtr(void);
 
 #endif /* __TLL_PERCEPTION_H_ */

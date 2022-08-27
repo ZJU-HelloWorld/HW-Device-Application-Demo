@@ -20,7 +20,7 @@
 #include "usart.h"
 /* Exported types ------------------------------------------------------------*/
 typedef uint8_t bool_t;
-/* Component Mode Enum ------------------------*/
+/* Status Enum ------------------------------- */
 typedef enum _dvc_status_type_def
 {
   DVC_OK,
@@ -28,7 +28,7 @@ typedef enum _dvc_status_type_def
   DVC_TX_ERROR,
   DVC_DATA_ERROR
 } Dvc_StatusTypeDef;
-
+/* Component Mode Enum ------------------------*/
 typedef enum _api_status_type_def
 {
   API_OK,
@@ -62,6 +62,27 @@ typedef enum _minipc_mode_e
   MINIPC_OFF = 0U,
   MINIPC_ON,
 } MinipcMode_e;
+
+/* Application Infomation Message Passing ---- */
+typedef enum _app_info_list_t
+{
+  COMM_INFO,
+  // ...
+  APP_INFO_NUM
+} AppInfoList_e;
+
+typedef enum _info_permission_e
+{
+  ASSIGN,
+  READ,
+  WRITE,
+} InfoPermission_e;
+
+typedef struct _app_info_msg_t
+{
+  void*            app_info[APP_INFO_NUM];
+  InfoPermission_e permission[APP_INFO_NUM];
+} AppInfoMsg_t;
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 #define IS_STEERABLE_STANDARD  1

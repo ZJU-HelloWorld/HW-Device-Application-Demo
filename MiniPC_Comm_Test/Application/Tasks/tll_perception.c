@@ -19,7 +19,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private constants ---------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-volatile CommInfo_t comm_info;
+volatile static CommInfo_t comm_info;
 /* External variables --------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void _TLL_Perception_UpdateMinipcData(CommInfo_t* info);
@@ -32,26 +32,32 @@ static void _TLL_Perception_UpdateMinipcData(CommInfo_t* info);
  * @note      called by `Sys_Init`
  *******************************************************************************
  */
-void TLL_Perception_Init(void)
+void TLL_Perception_Init(AppInfoMsg_t* msg)
 {
 #if (USE_MINIPC_UART || USE_MINIPC_USB)
   API_Comm_Minipc_Init((CommInfo_t*)&comm_info);
+  if (ASSIGN == msg->permission[COMM_INFO])
+  {
+    msg->app_info[COMM_INFO]   = (void*)TLL_Get_CommInfoPtr();
+    msg->permission[COMM_INFO] = WRITE;
+  }
 #endif
 }
 
 /**
  *******************************************************************************
- * @brief     Perception task, including handling referee info, attitude data,
- *            minipc and supercap control board data et al.
- * @param     uint32_t system_tick
- * @retval    None
- * @note      None
+ * @brief       Perception task, including handling referee info, attitude data,
+ *              minipc and supercap control board data et al.
+ * @param       uint32_t system_tick:
+ * @param       AppInfoMsg_t* msg:
+ * @arg         None
+ * @retval      None
  *******************************************************************************
  */
-void TLL_Perception_Task(uint32_t system_tick)
+void TLL_Perception_Task(uint32_t system_tick, AppInfoMsg_t* msg)
 {
   /* minipc update rx data and handle */
-  _TLL_Perception_UpdateMinipcData((CommInfo_t*)&comm_info);
+  _TLL_Perception_UpdateMinipcData((CommInfo_t*)msg->app_info[COMM_INFO]);
 }
 
 /**
@@ -77,9 +83,15 @@ volatile CommInfo_t* TLL_Get_CommInfoPtr(void)
  */
 static void _TLL_Perception_UpdateMinipcData(CommInfo_t* info)
 {
+  /* Enter Critical Section */
+  info->mutex = 1u;
+
   if (info->minipc_data.rx_update_flag)
   {
     info->minipc_data.rx_update_flag = 0;
     API_Comm_UpdateMinipcFrameInfo(info);
   }
+
+  /* Exit Critical Section */
+  info->mutex = 0u;
 }

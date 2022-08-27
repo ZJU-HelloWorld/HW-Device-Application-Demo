@@ -32,6 +32,9 @@ typedef enum _ctrl_source_e
 
 typedef struct _ctrl_info_t
 {
+  /* mutex */
+  bool_t mutex;
+  
   CtrlSource_e   ctrl_src;
   MouseKbEvent_t event;
 

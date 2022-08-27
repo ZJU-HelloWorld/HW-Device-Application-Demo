@@ -25,17 +25,19 @@
 #define IS_HUART_MINIPC(huart)  ((huart) == &HUART_MINIPC)
 /* Private constants ---------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-static uint32_t system_tick;
+static uint32_t     system_tick;
+static AppInfoMsg_t msg;
 /* External variables --------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
-static void Sys_Task_Manager(void);
+static void _Sys_Msg_Init(AppInfoMsg_t* msg);
+static void _Sys_Task_Manager(void);
 
 /**
  *******************************************************************************
- * @brief     Init devices, tasks et al and start IT
- * @param     None
- * @retval    None
- * @note      plz call me before while(1) segment in main.c
+ * @brief       Init devices, tasks et al and start IT
+ * @param       None
+ * @retval      None
+ * @note        plz call me before while(1) segment in main.c
  *******************************************************************************
  */
 void Sys_Init(void)
@@ -45,11 +47,30 @@ void Sys_Init(void)
   FML_Minipc_Init();
 #endif
   /* -------------------- Task Init ------------------ */
-  TLL_Perception_Init();
-  TLL_Action_Init();
+  _Sys_Msg_Init(&msg);
+
+  TLL_Perception_Init(&msg);
+  TLL_Action_Init(&msg);
 
   /* Main IT init to start managing tasks */
   HAL_TIM_Base_Start_IT(&HTIM_CONTROL);
+}
+
+/**
+ *******************************************************************************
+ * @brief       Init msg between tasks
+ * @param       AppInfoMsg_t* msg: msg struct containing task msgs
+ * @arg         None
+ * @retval      None
+ *******************************************************************************
+ */
+static void _Sys_Msg_Init(AppInfoMsg_t* msg)
+{
+  for (uint8_t i = 0; i < APP_INFO_NUM; i++)
+  {
+    msg->app_info[i]   = NULL;
+    msg->permission[i] = ASSIGN;
+  }
 }
 
 /**
@@ -60,15 +81,15 @@ void Sys_Init(void)
  * @note      Called by TIM6 interrupt
  *******************************************************************************
  */
-static void Sys_Task_Manager(void)
+static void _Sys_Task_Manager(void)
 {
   system_tick = HAL_GetTick();
 
-  CommInfo_t* tmp_comm_info = (CommInfo_t*)TLL_Get_CommInfoPtr();
   /* Perception --------------------------------------------------------------*/
-  TLL_Perception_Task(system_tick);
+  TLL_Perception_Task(system_tick, &msg);
   /* Action ------------------------------------------------------------------*/
-  TLL_Action_Task(system_tick, tmp_comm_info);
+  TLL_Action_Task(system_tick, &msg);
+
   /* Debug -------------------------------------------------------------------*/
 #if DEBUG_ON
   Debug_Watcher();
@@ -90,13 +111,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
   if (IS_HTIM_CONTROL(htim))
   {
-    Sys_Task_Manager();
+    _Sys_Task_Manager();
   }
 
 #if USE_MINIPC_USB
   if (IS_HTIM_USB_RX_IT(htim))
   {
     CommInfo_t* tmp_info = (CommInfo_t*)TLL_Get_CommInfoPtr();
+    if (tmp_info->mutex)
+    {
+      return;
+    }
+
     if (DVC_OK != FML_Minipc_RxDataHandler(&tmp_info->minipc_data))
     {
     }
@@ -106,6 +132,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 #endif
 }
 
+#if USE_MINIPC_UART
 /**
  *******************************************************************************
  * @brief     UART Rx complete callbacks in non blocking modes user realization
@@ -117,7 +144,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
  */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 {
-#if USE_MINIPC_UART
   if (IS_HUART_MINIPC(huart))
   {
     CommInfo_t* tmp_info = (CommInfo_t*)TLL_Get_CommInfoPtr();
@@ -128,5 +154,5 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
     FML_Minipc_Init();
 #endif
   }
-#endif
 }
+#endif

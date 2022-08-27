@@ -44,6 +44,8 @@ typedef enum _aim_type
 
 typedef struct _comm_info_t
 {
+  /* mutex */
+  bool_t mutex;
 #if IS_STEERABLE_STANDARD
   struct
   {

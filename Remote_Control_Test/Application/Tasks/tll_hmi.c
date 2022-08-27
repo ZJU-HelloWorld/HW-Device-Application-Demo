@@ -78,11 +78,15 @@ volatile CtrlInfo_t* TLL_Get_CtrlInfoPtr(void)
  */
 static void _TLL_Hmi_UpdateCtrlData(CtrlInfo_t* info)
 {
+  /* Enter Critical Section */
+  info->mutex = 1u;
+
   /* Update Ctrl Source */
   API_Ctrl_UpdateCtrlSrc(&info->last_data, &info->data, &info->ctrl_src);
-
   /* According to src and data, set mode and update action cmd */
   API_Ctrl_UpdateCtrlInfo(info);
-  
   info->last_data = info->data;
+
+  /* Exit Critical Section */
+  info->mutex = 0u;
 }

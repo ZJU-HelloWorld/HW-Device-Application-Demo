@@ -19,10 +19,6 @@
 #include "api_notification.h"
 #include "config.h"
 /* Exported types ------------------------------------------------------------*/
-typedef struct _note_info_t
-{
-  BuzzerNoteInfo_t buzzer;
-} NoteInfo_t;
 /* Exported macro ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/

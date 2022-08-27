@@ -105,12 +105,12 @@ Api_StatusTypeDef API_Comm_SendMinipcFrameInfo(CommInfo_t* info)
 
   Api_StatusTypeDef status = API_OK;
 #if IS_STEERABLE_STANDARD
-  uint8_t tmp_mode_code;
-  int16_t tmp_spd   = info->minipc_vars.tx.bullet_spd * 100;
-  int16_t tmp_roll  = info->minipc_vars.tx.roll * 100;
-  int16_t tmp_pitch = info->minipc_vars.tx.pitch * 100;
-  int16_t tmp_yaw   = info->minipc_vars.tx.yaw * 100;
-  uint8_t tmp_color = info->minipc_vars.tx.enemy_color;
+  uint8_t      tmp_mode_code;
+  int16_t      tmp_spd   = info->minipc_vars.tx.bullet_spd * 100;
+  int16_t      tmp_roll  = info->minipc_vars.tx.roll * 100;
+  int16_t      tmp_pitch = info->minipc_vars.tx.pitch * 100;
+  int16_t      tmp_yaw   = info->minipc_vars.tx.yaw * 100;
+  EnemyColor_e tmp_color = info->minipc_vars.tx.enemy_color;
 
   switch (info->minipc_vars.tx.aim_mode)
   {

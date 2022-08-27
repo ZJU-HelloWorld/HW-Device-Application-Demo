@@ -48,6 +48,12 @@ typedef struct _oled_note_info_t
 
   OledGram_t gram;
 } OledNoteInfo_t;
+
+typedef struct _note_info_t
+{
+  OledNoteInfo_t oled;
+  DeviceState_e  error_list[DEVICE_LIST_LEN];
+} NoteInfo_t;
 /* Exported constants --------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/

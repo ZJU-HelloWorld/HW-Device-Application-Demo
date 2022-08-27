@@ -23,7 +23,7 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
-void TLL_Action_Init(void);
-void TLL_Action_Task(uint32_t system_tick, CommInfo_t* comm_info);
+void TLL_Action_Init(AppInfoMsg_t* msg);
+void TLL_Action_Task(uint32_t system_tick, AppInfoMsg_t* msg);
 
 #endif /* __TLL_ACTION_H_ */
