@@ -52,7 +52,7 @@ void API_Note_Buzzer_Init(BuzzerNoteInfo_t* info)
  * @note      None
  *******************************************************************************
  */
-void API_Note_Buzzer_PlayStartupMusic(const uint8_t* music, const uint32_t len,
+void API_Note_Buzzer_PlayStartupMusic(const Tone_e* music, const uint32_t len,
                                       BuzzerNoteInfo_t* info)
 {
   if (NULL == info)

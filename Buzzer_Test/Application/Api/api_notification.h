@@ -59,7 +59,7 @@ typedef struct _note_info_t
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
 void API_Note_Buzzer_Init(BuzzerNoteInfo_t* info);
-void API_Note_Buzzer_PlayStartupMusic(const uint8_t* music, const uint32_t len,
+void API_Note_Buzzer_PlayStartupMusic(const Tone_e* music, const uint32_t len,
                                       BuzzerNoteInfo_t* info);
 void API_Note_Buzzer_Warn(BuzzerNoteInfo_t* info);
 void API_Note_Buzzer_SetErrorType(const ErrorToNote_e type,
