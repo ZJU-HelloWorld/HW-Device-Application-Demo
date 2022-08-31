@@ -103,15 +103,18 @@ int main(void)
   {
     /* USER CODE END WHILE */
 #if IS_STEERABLE_STANDARD
-    CommInfo_t* info                 = (CommInfo_t*)TLL_Get_CommInfoPtr();
-    info->minipc_vars.tx.enemy_color = BLUE;
-    // info->minipc_vars.tx.enemy_color = info->minipc_vars.rx.enemy_color; // for loop test
-    info->minipc_vars.tx.aim_mode    = ANTI_TWIST;
-    info->minipc_vars.tx.bullet_spd  = 28.0f;
-    info->minipc_vars.tx.minipc_mode = MINIPC_ON;
-    info->minipc_vars.tx.roll        = 0.0f;
-    info->minipc_vars.tx.pitch       = 1.0f;
-    info->minipc_vars.tx.yaw         = 160.0f;
+    CommInfo_t* info = (CommInfo_t*)TLL_Get_CommInfoPtr();
+    if (!info->mutex)
+    {
+      info->minipc_comm_info.minipc_vars.tx.enemy_color = BLUE;
+      // info->minipc_comm_info.minipc_vars.tx.enemy_color = info->minipc_vars.rx.enemy_color; // for loop communicating test
+      info->minipc_comm_info.minipc_vars.tx.aim_mode    = ANTI_TWIST;
+      info->minipc_comm_info.minipc_vars.tx.bullet_spd  = 28.0f;
+      info->minipc_comm_info.minipc_vars.tx.minipc_mode = MINIPC_ON;
+      info->minipc_comm_info.minipc_vars.tx.roll        = 0.0f;
+      info->minipc_comm_info.minipc_vars.tx.pitch       = 1.0f;
+      info->minipc_comm_info.minipc_vars.tx.yaw         = 160.0f;
+    }
 #endif
     /* USER CODE BEGIN 3 */
   }

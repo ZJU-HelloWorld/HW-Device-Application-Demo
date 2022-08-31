@@ -24,12 +24,12 @@
 /**
  *******************************************************************************
  * @brief     Init minipc communication data
- * @param     CommInfo_t* info
- * @retval    CommInfo_t* info
+ * @param     MinipcCommInfo_t* info
+ * @retval    MinipcCommInfo_t* info
  * @note      None
  *******************************************************************************
  */
-void API_Comm_Minipc_Init(CommInfo_t* info)
+void API_Comm_Minipc_Init(MinipcCommInfo_t* info)
 {
   if (NULL == info)
     return;
@@ -66,12 +66,12 @@ void API_Comm_Minipc_Init(CommInfo_t* info)
 /**
  *******************************************************************************
  * @brief     handle data rx from minipc
- * @param     CommInfo_t* info
- * @retval    CommInfo_t* info
+ * @param     MinipcCommInfo_t* info
+ * @retval    MinipcCommInfo_t* info
  * @note      None
  *******************************************************************************
  */
-void API_Comm_UpdateMinipcFrameInfo(CommInfo_t* info)
+void API_Comm_UpdateMinipcFrameInfo(MinipcCommInfo_t* info)
 {
   if (NULL == info)
     return;
@@ -92,13 +92,13 @@ void API_Comm_UpdateMinipcFrameInfo(CommInfo_t* info)
 /**
  *******************************************************************************
  * @brief     Generate frame sent to MiniPC and cmd tx
- * @param     CommInfo_t* info
+ * @param     MinipcCommInfo_t* info
  * @retval    Api_StatusTypeDef status
- * @retval    CommInfo_t* info
+ * @retval    MinipcCommInfo_t* info
  * @note      None
  *******************************************************************************
  */
-Api_StatusTypeDef API_Comm_SendMinipcFrameInfo(CommInfo_t* info)
+Api_StatusTypeDef API_Comm_SendMinipcFrameInfo(MinipcCommInfo_t* info)
 {
   if (NULL == info)
     return API_DATA_ERROR;

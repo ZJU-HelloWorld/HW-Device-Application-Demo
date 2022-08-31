@@ -64,6 +64,7 @@ static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick);
  */
 void TLL_Hmi_Init(void)
 {
+  note_info.mutex = 0u;
 #if USE_BUZZER
   API_Note_Buzzer_Init((BuzzerNoteInfo_t*)&note_info.buzzer);
 #endif
@@ -108,6 +109,9 @@ volatile NoteInfo_t* TLL_Get_NoteInfoPtr(void)
  */
 static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick)
 {
+  /* Enter Critical Section */
+  info->mutex = 1u;
+
   if (IS_ERROR_TO_BUZZER_NOTE(&info->buzzer))
   {
     API_Note_Buzzer_Warn(&info->buzzer);
@@ -117,4 +121,7 @@ static void _TLL_Hmi_NoteTask(NoteInfo_t* info, uint32_t system_tick)
   {
     API_Note_Buzzer_PlayStartupMusic(music_buf, STARTUP_MUSIC_LEN, &info->buzzer);
   }
+
+  /* Exit Critical Section */
+  info->mutex = 0u;
 }

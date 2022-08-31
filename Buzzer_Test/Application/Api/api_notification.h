@@ -40,6 +40,8 @@ typedef struct _buzzer_note_info_t
 
 typedef struct _note_info_t
 {
+  bool_t mutex;
+
   BuzzerNoteInfo_t buzzer;
 } NoteInfo_t;
 /* Exported macro ------------------------------------------------------------*/

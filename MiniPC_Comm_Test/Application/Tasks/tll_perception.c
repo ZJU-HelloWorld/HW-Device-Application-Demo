@@ -34,8 +34,9 @@ static void _TLL_Perception_UpdateMinipcData(CommInfo_t* info);
  */
 void TLL_Perception_Init(AppInfoMsg_t* msg)
 {
+  comm_info.mutex = 0u;
 #if (USE_MINIPC_UART || USE_MINIPC_USB)
-  API_Comm_Minipc_Init((CommInfo_t*)&comm_info);
+  API_Comm_Minipc_Init((MinipcCommInfo_t*)&comm_info.minipc_comm_info);
   if (ASSIGN == msg->permission[COMM_INFO])
   {
     msg->app_info[COMM_INFO]   = (void*)TLL_Get_CommInfoPtr();
@@ -56,8 +57,10 @@ void TLL_Perception_Init(AppInfoMsg_t* msg)
  */
 void TLL_Perception_Task(uint32_t system_tick, AppInfoMsg_t* msg)
 {
+  CommInfo_t* info = (CommInfo_t*)msg->app_info[COMM_INFO];
+
   /* minipc update rx data and handle */
-  _TLL_Perception_UpdateMinipcData((CommInfo_t*)msg->app_info[COMM_INFO]);
+  _TLL_Perception_UpdateMinipcData(info);
 }
 
 /**
@@ -86,12 +89,11 @@ static void _TLL_Perception_UpdateMinipcData(CommInfo_t* info)
   /* Enter Critical Section */
   info->mutex = 1u;
 
-  if (info->minipc_data.rx_update_flag)
+  if (info->minipc_comm_info.minipc_data.rx_update_flag)
   {
-    info->minipc_data.rx_update_flag = 0;
-    API_Comm_UpdateMinipcFrameInfo(info);
+    info->minipc_comm_info.minipc_data.rx_update_flag = 0;
+    API_Comm_UpdateMinipcFrameInfo(&info->minipc_comm_info);
   }
-
   /* Exit Critical Section */
   info->mutex = 0u;
 }

@@ -105,26 +105,28 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     NoteInfo_t* info = (NoteInfo_t*)TLL_Get_NoteInfoPtr();
-
+    if (!info->mutex)
+    {
 #if IS_STEERABLE_STANDARD
-    float i = SUPERCAP_MIN_USABLE_VOTAGE +
-              HAL_GetTick() % 5000 / 5000.0f * (SUPERCAP_FULL_VOTAGE - SUPERCAP_MIN_USABLE_VOTAGE);
-    API_Note_Oled_SetSupercapPerc(USER_SET, i, &info->oled);
-    API_Note_Oled_SetEnemyColor(RED, &info->oled);
+      float i = SUPERCAP_MIN_USABLE_VOTAGE +
+                HAL_GetTick() % 5000 / 5000.0f * (SUPERCAP_FULL_VOTAGE - SUPERCAP_MIN_USABLE_VOTAGE);
+      API_Note_Oled_SetSupercapPerc(USER_SET, i, &info->oled);
+      API_Note_Oled_SetEnemyColor(RED, &info->oled);
 #endif
 
-    API_Note_Oled_SetDeviceState(DEVICE_RC, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_BOARD_COMM, DEVICE_ERROR, info->error_list); // DEVICE_ERROR
-    API_Note_Oled_SetDeviceState(DEVICE_REFEREE, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_MINIPC, DEVICE_ERROR, info->error_list); // DEVICE_ERROR
-    API_Note_Oled_SetDeviceState(DEVICE_FRIC_MOTOR, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_FEED_MOTOR, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_GIMBAL_YAW_MOTOR, DEVICE_ERROR, info->error_list); //DEVICE_ERROR
-    API_Note_Oled_SetDeviceState(DEVICE_GIMBAL_PITCH_MOTOR, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_WHEEL_MOTOR_F, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_WHEEL_MOTOR_B, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_STEER_MOTOR_F, DEVICE_OK, info->error_list);
-    API_Note_Oled_SetDeviceState(DEVICE_STEER_MOTOR_B, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_RC, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_BOARD_COMM, DEVICE_ERROR, info->error_list); // DEVICE_ERROR
+      API_Note_Oled_SetDeviceState(DEVICE_REFEREE, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_MINIPC, DEVICE_ERROR, info->error_list); // DEVICE_ERROR
+      API_Note_Oled_SetDeviceState(DEVICE_FRIC_MOTOR, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_FEED_MOTOR, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_GIMBAL_YAW_MOTOR, DEVICE_ERROR, info->error_list); // DEVICE_ERROR
+      API_Note_Oled_SetDeviceState(DEVICE_GIMBAL_PITCH_MOTOR, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_WHEEL_MOTOR_F, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_WHEEL_MOTOR_B, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_STEER_MOTOR_F, DEVICE_OK, info->error_list);
+      API_Note_Oled_SetDeviceState(DEVICE_STEER_MOTOR_B, DEVICE_OK, info->error_list);
+    }
   }
   /* USER CODE END 3 */
 }

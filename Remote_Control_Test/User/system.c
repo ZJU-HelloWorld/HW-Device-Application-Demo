@@ -102,18 +102,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 {
   if (IS_HUART_DBUS(huart))
   {
-    CtrlInfo_t* tmp_info = (CtrlInfo_t*)TLL_Get_CtrlInfoPtr();
-    if (tmp_info->mutex)
+    CtrlInfo_t* info = (CtrlInfo_t*)TLL_Get_CtrlInfoPtr();
+    if (!info->mutex)
     {
-      return;
-    }
-    
-    if (DVC_OK != FML_Rc_RxDataHandler(&tmp_info->data))
-    {
-      /* hardware reset */
-      FML_Rc_Reset();
-      /* data reset */
-      API_Ctrl_Init(tmp_info);
+      if (DVC_OK != FML_Rc_RxDataHandler(&info->data))
+      {
+        /* hardware reset */
+        FML_Rc_Reset();
+        /* data reset */
+        API_Ctrl_Init(info);
+      }
     }
   }
 }

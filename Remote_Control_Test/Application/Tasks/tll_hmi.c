@@ -35,6 +35,7 @@ static void _TLL_Hmi_UpdateCtrlData(CtrlInfo_t* info);
  */
 void TLL_Hmi_Init(void)
 {
+  ctrl_info.mutex = 0u;
 #if USE_RC
   API_Ctrl_Init((CtrlInfo_t*)&ctrl_info);
 #endif

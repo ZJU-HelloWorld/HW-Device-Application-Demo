@@ -42,10 +42,8 @@ typedef enum _aim_type
   NO_TAR     = 0x08,
 } AimType_e;
 
-typedef struct _comm_info_t
+typedef struct _minipc_comm_info_t
 {
-  /* mutex */
-  bool_t mutex;
 #if IS_STEERABLE_STANDARD
   struct
   {
@@ -71,13 +69,20 @@ typedef struct _comm_info_t
 #endif
   /* raw data */
   MinipcData_t minipc_data;
+} MinipcCommInfo_t;
+
+typedef struct _comm_info_t
+{
+  /* mutex */
+  bool_t           mutex;
+  MinipcCommInfo_t minipc_comm_info;
 } CommInfo_t;
 
 /* Exported constants --------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
-void              API_Comm_Minipc_Init(CommInfo_t* info);
-void              API_Comm_UpdateMinipcFrameInfo(CommInfo_t* info);
-Api_StatusTypeDef API_Comm_SendMinipcFrameInfo(CommInfo_t* info);
+void              API_Comm_Minipc_Init(MinipcCommInfo_t* info);
+void              API_Comm_UpdateMinipcFrameInfo(MinipcCommInfo_t* info);
+Api_StatusTypeDef API_Comm_SendMinipcFrameInfo(MinipcCommInfo_t* info);
 
 #endif /* __API_COMM_H_ */

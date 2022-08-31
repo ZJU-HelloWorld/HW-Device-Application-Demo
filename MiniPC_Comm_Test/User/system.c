@@ -117,17 +117,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 #if USE_MINIPC_USB
   if (IS_HTIM_USB_RX_IT(htim))
   {
-    CommInfo_t* tmp_info = (CommInfo_t*)TLL_Get_CommInfoPtr();
-    if (tmp_info->mutex)
+    CommInfo_t* info = (CommInfo_t*)TLL_Get_CommInfoPtr();
+    if (!info->mutex)
     {
-      return;
+      if (DVC_OK != FML_Minipc_RxDataHandler(&info->minipc_comm_info.minipc_data))
+      {
+      }
+      HAL_TIM_Base_Stop_IT(&HTIM_USB_RX_IT);
     }
-
-    if (DVC_OK != FML_Minipc_RxDataHandler(&tmp_info->minipc_data))
-    {
-    }
-
-    HAL_TIM_Base_Stop_IT(&HTIM_USB_RX_IT);
   }
 #endif
 }
@@ -146,13 +143,16 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 {
   if (IS_HUART_MINIPC(huart))
   {
-    CommInfo_t* tmp_info = (CommInfo_t*)TLL_Get_CommInfoPtr();
-    if (DVC_OK != FML_Minipc_RxDataHandler(&tmp_info->minipc_data))
+    CommInfo_t* info = (CommInfo_t*)TLL_Get_CommInfoPtr();
+    if (!info->mutex)
     {
-    }
+      if (DVC_OK != FML_Minipc_RxDataHandler(&info->minipc_comm_info.minipc_data))
+      {
+      }
 #if USE_MINIPC_UART_RX_IT
-    FML_Minipc_Init();
+      FML_Minipc_Init();
 #endif
+    }
   }
 }
 #endif

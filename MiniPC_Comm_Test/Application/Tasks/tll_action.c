@@ -48,10 +48,12 @@ void TLL_Action_Init(AppInfoMsg_t* msg)
  */
 void TLL_Action_Task(uint32_t system_tick, AppInfoMsg_t* msg)
 {
+  CommInfo_t* info = (CommInfo_t*)msg->app_info[COMM_INFO];
+
   /* minipc send tx data */
   if (IS_TO_SEND_MINIPC(system_tick))
   {
-    _TLL_Action_SendMinipcData((CommInfo_t*)msg->app_info[COMM_INFO]);
+    _TLL_Action_SendMinipcData(info);
   }
 }
 
@@ -65,7 +67,13 @@ void TLL_Action_Task(uint32_t system_tick, AppInfoMsg_t* msg)
  */
 static void _TLL_Action_SendMinipcData(CommInfo_t* info)
 {
-  if (API_OK != API_Comm_SendMinipcFrameInfo(info))
+  /* Enter Critical Section */
+  info->mutex = 1u;
+
+  if (API_OK != API_Comm_SendMinipcFrameInfo(&info->minipc_comm_info))
   {
   }
+
+  /* Exit Critical Section */
+  info->mutex = 0u;
 }

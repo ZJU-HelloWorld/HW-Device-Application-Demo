@@ -51,6 +51,8 @@ typedef struct _oled_note_info_t
 
 typedef struct _note_info_t
 {
+  bool_t mutex;
+
   OledNoteInfo_t oled;
   DeviceState_e  error_list[DEVICE_LIST_LEN];
 } NoteInfo_t;
