@@ -101,7 +101,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    /* USER CODE END WHILE */
 #if IS_STEERABLE_STANDARD
     CommInfo_t* info = (CommInfo_t*)TLL_Get_CommInfoPtr();
     if (!info->mutex)
@@ -116,6 +115,8 @@ int main(void)
       info->minipc_comm_info.minipc_vars.tx.yaw         = 160.0f;
     }
 #endif
+    /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
