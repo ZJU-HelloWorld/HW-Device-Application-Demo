@@ -1,6 +1,6 @@
-**HWModuleTestDemo**
+**HWDeviceApplicationDemo**
 
-# Hello World 电控模块测试例程
+# Hello World 电控设备应用例程
 
 Copyright (c) 2022 Hello World Team of Zhejiang University.
 
