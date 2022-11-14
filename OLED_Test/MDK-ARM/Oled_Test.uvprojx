@@ -707,11 +707,6 @@
           <GroupName>Components/Device</GroupName>
           <Files>
             <File>
-              <FileName>fml_limit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Components\fml_limit.c</FilePath>
-            </File>
-            <File>
               <FileName>fml_minipc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Components\fml_minipc.c</FilePath>
